@@ -1,6 +1,6 @@
 namespace WebApi.Models.Sounds;
 
-public class UpdateRequest
+public class CreateRequest
 {
     public int Id { get; set; }
     public int PermissionReq { get; set; }
