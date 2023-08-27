@@ -2,6 +2,7 @@ namespace WebApi.Services;
 
 using AutoMapper;
 using BCrypt.Net;
+using Microsoft.AspNetCore.SignalR;
 using WebApi.Authorization;
 using WebApi.Entities;
 using WebApi.Helpers;
@@ -11,6 +12,8 @@ public interface IUserService
 {
     AuthenticateResponse Authenticate(AuthenticateRequest model);
     IEnumerable<User> GetAll();
+    int GetUserPermission(int id);
+    void UpdateUserPermission(int id, UpdateRequest model);
     User GetById(int id);
     void Register(RegisterRequest model);
     void Update(int id, UpdateRequest model);
@@ -57,6 +60,11 @@ public class UserService : IUserService
         return getUser(id);
     }
 
+    public int GetUserPermission(int id)
+    {
+        return getPermission(id);
+    }
+
     public void Register(RegisterRequest model)
     {
         // validate
@@ -92,6 +100,23 @@ public class UserService : IUserService
         _context.SaveChanges();
     }
 
+    public void UpdateUserPermission(int id, UpdateRequest model)
+    {
+        var user = getUser(id);
+
+        if (model.Permission == user.Permission)
+        {
+            throw new AppException("Permission did not change");
+        }
+
+        if (!string.IsNullOrEmpty(model.Password))
+            user.PasswordHash = BCrypt.HashPassword(model.Password);
+
+        _mapper.Map(model, user);
+        _context.Users.Update(user);
+        _context.SaveChanges();
+    }
+
     public void Delete(int id)
     {
         var user = getUser(id);
@@ -107,4 +132,12 @@ public class UserService : IUserService
         if (user == null) throw new KeyNotFoundException("User not found");
         return user;
     }
+
+    private int getPermission(int id)
+    {
+        var user = _context.Users.Find(id);
+        if (user == null) throw new KeyNotFoundException("Permission not set");
+        return user.Permission;
+    }
+
 }

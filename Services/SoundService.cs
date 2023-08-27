@@ -5,11 +5,10 @@ using BCrypt.Net;
 using WebApi.Authorization;
 using WebApi.Entities;
 using WebApi.Helpers;
-using WebApi.Models.Users;
+using WebApi.Models.Sounds;
 
 public interface ISoundService
 {
-    AuthenticateResponse Authenticate(AuthenticateRequest model);
     IEnumerable<Sound> GetAll();
     Sound GetById(int id);
     void Update(int id, UpdateRequest model);
@@ -32,78 +31,54 @@ public class SoundService : ISoundService
         _mapper = mapper;
     }
 
-    public AuthenticateResponse Authenticate(AuthenticateRequest model)
+    public IEnumerable<Sound> GetAll()
     {
-        var user = _context.Users.SingleOrDefault(x => x.Username == model.Username);
-
-        // validate
-        if (user == null || !BCrypt.Verify(model.Password, user.PasswordHash))
-            throw new AppException("Username or password is incorrect");
-
-        // authentication successful
-        var response = _mapper.Map<AuthenticateResponse>(user);
-        response.Token = _jwtUtils.GenerateToken(user);
-        return response;
+        return _context.Sounds;
     }
 
-    public IEnumerable<User> GetAll()
+    public Sound GetById(int id)
     {
-        return _context.Users;
+        return getSound(id);
     }
 
-    public User GetById(int id)
-    {
-        return getUser(id);
-    }
-
-    public void Register(RegisterRequest model)
+    // Note: follow up with where these records are appended, if they need to be reorganized.
+    public void Create(CreateRequest model)
     {
         // validate
-        if (_context.Users.Any(x => x.Username == model.Username))
-            throw new AppException("Username '" + model.Username + "' is already taken");
+        if (_context.Sounds.Any(x => x.Name == model.Name))
+            throw new AppException("This item: '" + model.Name + "' is already been entered.");
 
-        // map model to new user object
-        var user = _mapper.Map<User>(model);
+        // map model to new object
+        var sound = _mapper.Map<Sound>(model);
 
-        // hash password
-        user.PasswordHash = BCrypt.HashPassword(model.Password);
-
-        // save user
-        _context.Users.Add(user);
+        // save record
+        _context.Sounds.Add(sound);
         _context.SaveChanges();
     }
 
     public void Update(int id, UpdateRequest model)
     {
-        var user = getUser(id);
+        var sound = getSound(id);
 
-        // validate
-        if (model.Username != user.Username && _context.Users.Any(x => x.Username == model.Username))
-            throw new AppException("Username '" + model.Username + "' is already taken");
-
-        // hash password if it was entered
-        if (!string.IsNullOrEmpty(model.Password))
-            user.PasswordHash = BCrypt.HashPassword(model.Password);
-
-        // copy model to user and save
-        _mapper.Map(model, user);
-        _context.Users.Update(user);
+        // copy model to object and save
+        _mapper.Map(model, sound);
+        _context.Sounds.Update(sound);
         _context.SaveChanges();
     }
 
     public void Delete(int id)
     {
-        var user = getUser(id);
-        _context.Users.Remove(user);
+        var sound = getSound(id);
+        _context.Sounds.Remove(sound);
         _context.SaveChanges();
     }
 
     // helper methods
 
-    private User getUser(int id)
+    private Sound getSound(int id)
     {
-        var user = _context.Users.Find(id);
-        if (user == null) throw new KeyNotFoundException("User not found");
-        return user;
+        var sound = _context.Sounds.Find(id);
+        if (sound == null) throw new KeyNotFoundException("Record not found");
+        return sound;
     }
 }

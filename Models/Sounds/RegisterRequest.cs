@@ -1,7 +1,11 @@
 namespace WebApi.Models.Sounds;
 
-public class UpdateRequest
+using System.ComponentModel.DataAnnotations;
+
+public class RegisterRequest
 {
+    [Required]
+    public string Name { get; set; }
     public int Id { get; set; }
     public int PermissionReq { get; set; }
     public string Name { get; set; }
@@ -17,4 +21,5 @@ public class UpdateRequest
     public bool IsResidential { get; set; }
     public bool IsPublicLands { get; set; }
     public string Topography { get; set; }
+
 }

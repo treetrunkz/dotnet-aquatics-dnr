@@ -57,6 +57,28 @@ public class UsersController : ControllerBase
         return Ok(user);
     }
 
+    // Protected -- Only administrators may access route
+    [HttpPut("permission/{level}")]
+    public IActionResult UpdatePermission(int level, UpdateRequest model)
+    {
+        _userService.UpdateUserPermission(level, model);
+        var permission = "";
+        var users = _userService.GetUserPermission(level);
+        if (users == 0)
+        {
+            permission = "Guest User";
+        }
+        if (users == 1)
+        {
+            permission = "Registered User";
+        }
+        if (users == 111)
+        {
+            permission = "admin";
+        }
+        return Ok(new { message = "Permission set to " + permission + "." });
+    }
+
     [HttpPut("{id}")]
     public IActionResult Update(int id, UpdateRequest model)
     {

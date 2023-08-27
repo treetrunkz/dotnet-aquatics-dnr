@@ -1,9 +1,16 @@
 namespace WebApi.Entities;
 
+using System.ComponentModel;
 using System.Text.Json.Serialization;
 
 public class Sound
 {
+
+    public int Id { get; set; }
+
+    [DefaultValue(0)]
+    public int PermissionReq { get; set; }
+
     public string Name { get; set; }
     public float Coordinate_X { get; set; }
     public float Coordinate_Y { get; set; }
@@ -16,5 +23,7 @@ public class Sound
     public string InvasiveSpecies { get; set; }
     public bool IsResidential { get; set; }
     public bool IsPublicLands { get; set; }
+
+    [DefaultValue("Topography not found.")]
     public string Topography { get; set; }
 }
