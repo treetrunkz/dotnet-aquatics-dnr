@@ -10,12 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
     var services = builder.Services;
     var env = builder.Environment;
  
-    // use sql server db in production and sqlite db in development
+    // Keep Note For Later: use sql server db in production and sqlite db in development
     if (env.IsProduction())
         services.AddDbContext<DataContext>();
     else
         services.AddDbContext<DataContext>();
- 
+
+    services.AddMvc();
+    services.AddControllers();
+    services.AddRazorPages();
     services.AddCors();
     services.AddControllers();
 
@@ -49,7 +52,8 @@ using (var scope = app.Services.CreateScope())
 
     // global error handler
     app.UseMiddleware<ErrorHandlerMiddleware>();
-
+    app.UseDefaultFiles();
+    app.UseStaticFiles();
     // custom jwt auth middleware
     app.UseMiddleware<JwtMiddleware>();
 

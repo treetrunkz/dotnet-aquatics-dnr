@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace WebApi.Models.Sounds;
 
 public class UpdateRequest
@@ -11,8 +13,10 @@ public class UpdateRequest
     public int Depth_m { get; set; }
     public string Wildlife { get; set; }
     public string Biome { get; set; }
-    public string Health { get; set; }
+    public string WaterHealth { get; set; }
     public float Speed { get; set; }
+    public string Currents { get; set; }
+    public string Tides { get; set; }
     public string InvasiveSpecies { get; set; }
     public bool IsResidential { get; set; }
     public bool IsPublicLands { get; set; }

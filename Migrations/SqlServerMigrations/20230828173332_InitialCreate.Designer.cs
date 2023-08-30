@@ -11,7 +11,7 @@ using WebApi.Helpers;
 namespace WebApi.Migrations.SqlServerMigrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230827014924_InitialCreate")]
+    [Migration("20230828173332_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,11 +40,11 @@ namespace WebApi.Migrations.SqlServerMigrations
                     b.Property<float>("Coordinate_Y")
                         .HasColumnType("real");
 
+                    b.Property<string>("Currents")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Depth_m")
                         .HasColumnType("int");
-
-                    b.Property<string>("Health")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("InvasiveSpecies")
                         .HasColumnType("nvarchar(max)");
@@ -64,7 +64,13 @@ namespace WebApi.Migrations.SqlServerMigrations
                     b.Property<float>("Speed")
                         .HasColumnType("real");
 
+                    b.Property<string>("Tides")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Topography")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WaterHealth")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Width_m")

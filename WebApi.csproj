@@ -5,12 +5,11 @@
         <UserSecretsId>7e9c4d85-fc14-461d-b56f-77b043473941</UserSecretsId>
     </PropertyGroup>
     <ItemGroup>
-      <Content Remove="Views\Home\index.cshtml" />
-    </ItemGroup>
-    <ItemGroup>
         <PackageReference Include="AutoMapper" Version="11.0.0" />
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
+        <PackageReference Include="knockoutjs" Version="3.5.1" />
+        <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.9" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
@@ -19,14 +18,9 @@
         </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
         <PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.118" />
         <PackageReference Include="System.Data.SQLite.Core" Version="1.0.118" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.0" />
-    </ItemGroup>
-    <ItemGroup>
-      <None Include="Views\Home\index.cshtml" />
-    </ItemGroup>
-    <ItemGroup>
-      <Folder Include="Migrations\" />
     </ItemGroup>
 </Project>

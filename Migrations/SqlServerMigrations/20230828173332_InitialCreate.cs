@@ -22,8 +22,10 @@ namespace WebApi.Migrations.SqlServerMigrations
                     Depth_m = table.Column<int>(type: "int", nullable: false),
                     Wildlife = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Biome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Health = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WaterHealth = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Speed = table.Column<float>(type: "real", nullable: false),
+                    Currents = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Tides = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     InvasiveSpecies = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsResidential = table.Column<bool>(type: "bit", nullable: false),
                     IsPublicLands = table.Column<bool>(type: "bit", nullable: false),
@@ -43,8 +45,8 @@ namespace WebApi.Migrations.SqlServerMigrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Permission = table.Column<int>(type: "int", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Permission = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

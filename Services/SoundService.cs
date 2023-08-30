@@ -9,8 +9,9 @@ using WebApi.Models.Sounds;
 
 public interface ISoundService
 {
-    IEnumerable<Sound> GetAll();
+    IEnumerable<Sound> GetAllSounds();
     Sound GetById(int id);
+    void Add(AddRequest model);
     void Update(int id, UpdateRequest model);
     void Delete(int id);
 }
@@ -31,7 +32,7 @@ public class SoundService : ISoundService
         _mapper = mapper;
     }
 
-    public IEnumerable<Sound> GetAll()
+    public IEnumerable<Sound> GetAllSounds()
     {
         return _context.Sounds;
     }
@@ -42,7 +43,7 @@ public class SoundService : ISoundService
     }
 
     // Note: follow up with where these records are appended, if they need to be reorganized.
-    public void Create(CreateRequest model)
+    public void Add(AddRequest model)
     {
         // validate
         if (_context.Sounds.Any(x => x.Name == model.Name))
