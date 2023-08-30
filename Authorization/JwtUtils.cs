@@ -40,7 +40,7 @@ public class JwtUtils : IJwtUtils
 
     public int? ValidateToken(string token)
     {
-        if (token == null) 
+        if (token == null)
             return null;
 
         var tokenHandler = new JwtSecurityTokenHandler();

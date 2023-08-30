@@ -39,6 +39,7 @@ public class UsersController : ControllerBase
     [HttpPost("register")]
     public IActionResult Register(RegisterRequest model)
     {
+
         _userService.Register(model);
         return Ok(new { message = "Registration successful" });
     }
@@ -55,28 +56,6 @@ public class UsersController : ControllerBase
     {
         var user = _userService.GetById(id);
         return Ok(user);
-    }
-
-    // Protected -- Only administrators may access route
-    [HttpPut("permission/{level}")]
-    public IActionResult UpdatePermission(int level, UpdateRequest model)
-    {
-        _userService.UpdateUserPermission(level, model);
-        var permission = "";
-        var users = _userService.GetUserPermission(level);
-        if (users == 0)
-        {
-            permission = "Guest User";
-        }
-        if (users == 1)
-        {
-            permission = "Registered User";
-        }
-        if (users == 111)
-        {
-            permission = "admin";
-        }
-        return Ok(new { message = "Permission set to " + permission + "." });
     }
 
     [HttpPut("{id}")]

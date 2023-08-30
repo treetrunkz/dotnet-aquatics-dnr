@@ -19,5 +19,6 @@ public class DataContext : DbContext
     }
 
     public DbSet<User> Users { get; set; }
+
     public DbSet<Sound> Sounds { get; set; }
 }

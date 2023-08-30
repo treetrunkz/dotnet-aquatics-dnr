@@ -3,6 +3,9 @@ namespace WebApi.Services;
 using AutoMapper;
 using BCrypt.Net;
 using Microsoft.AspNetCore.SignalR;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Results;
 using WebApi.Authorization;
 using WebApi.Entities;
 using WebApi.Helpers;
@@ -80,6 +83,7 @@ public class UserService : IUserService
         // save user
         _context.Users.Add(user);
         _context.SaveChanges();
+
     }
 
     public void Update(int id, UpdateRequest model)

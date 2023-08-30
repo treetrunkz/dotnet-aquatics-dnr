@@ -1,0 +1,190 @@
+﻿@section Scripts {
+    <script>
+        console.log("File Test")
+        function ViewModel() {
+            var self = this;
+
+            var tokenKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJuYmYiOjE2OTMyNTAwODksImV4cCI6MTY5Mzg1NDg4OSwiaWF0IjoxNjkzMjUwMDg5fQ.XEls9WP69PODOTt2ITZFDqtaLjKkX64damLQglwnOhI';
+
+            self.result = ko.observable();
+            self.user = ko.observable();
+
+            self.registerFirstname = ko.observable();
+            self.registerLastname = ko.observable();
+            self.registerUsername = ko.observable();
+            self.registerPassword = ko.observable();
+            self.registerPermission = 1;
+            
+            self.loginUsername = ko.observable();
+            self.loginPassword = ko.observable();
+            self.errors = ko.observableArray([]);
+
+            function showError(jqXHR) {
+
+                self.result(jqXHR.status + ': ' + jqXHR.statusText);
+
+                var response = jqXHR.responseJSON;
+                if (response) {
+                    if (response.Message) self.errors.push(response.Message);
+                    if (response.ModelState) {
+                        var modelState = response.ModelState;
+                        for (var prop in modelState) {
+                            if (modelState.hasOwnProperty(prop)) {
+                                var msgArr = modelState[prop]; // expect array here
+                                if (msgArr.length) {
+                                    for (var i = 0; i < msgArr.length; ++i) self.errors.push(msgArr[i]);
+                                }
+                            }
+                        }
+                    }
+                    if (response.error) self.errors.push(response.error);
+                    if (response.error_description) self.errors.push(response.error_description);
+                }
+            }
+
+            self.callApi = function () {
+                self.result('');
+                self.errors.removeAll();
+
+                var token = sessionStorage.getItem(tokenKey);
+                var headers = {};
+                if (token) {
+                    headers.Authorization = 'Bearer ' + token;
+                }
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/users',
+                    headers: headers
+                }).done(function (data) {
+                    self.result(data);
+                }).fail(showError);
+            }
+
+            self.register = function () {
+                self.result('');
+                self.errors.removeAll();
+
+                var data = {
+                    firstname: self.registerFirstname(),
+                    lastname: self.reigsterLastname(),
+                    username: self.registerUsername(),
+                    password: self.registerPassword(),
+                    permission: 111
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/users/register',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(data)
+                }).done(function (data) {
+                    self.result("Done!");
+                }).fail(showError);
+            }
+
+            self.login = function () {
+                self.result('');
+                self.errors.removeAll();
+
+                var loginData = {
+                    // grant_type: 'password',
+                    Username: self.loginUsername(),
+                    Password: self.loginPassword()
+                };
+
+                console.log(loginData)
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/users/authenticate',
+                    data: JSON.stringify(loginData)
+                }).done(function (data) {
+                    self.user(data.userName);
+                    // Cache the access token in session storage.
+                    sessionStorage.setItem(tokenKey, data.access_token);
+                }).fail(showError);
+            }
+
+            self.logout = function () {
+                // Log out from the cookie based logon.
+                var token = sessionStorage.getItem(tokenKey);
+                var headers = {};
+                if (token) {
+                    headers.Authorization = 'Bearer ' + token;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/users/logout',
+                    headers: headers
+                }).done(function (data) {
+                    // Successfully logged out. Delete the token.
+                    self.user('');
+                    sessionStorage.removeItem(tokenKey);
+                }).fail(showError);
+            }
+        }
+
+        var app = new ViewModel();
+        ko.applyBindings(app);
+    </script>
+        }
+@model WebApi.Entities.User
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "../../Pages/Shared/_Layout.cshtml";
+}
+    <div class="col-sm-4">
+        <h3>Log In</h3>
+        <form data-bind="submit: login">
+            <div class="form-group">
+                <label>Username</label>
+                <input class="form-control" type="text" data-bind="value: loginUsername" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input class="form-control" type="password" data-bind="value: loginPassword" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">Log In</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Register</button>
+            </div>
+        </form>
+    <form method="post">
+        <div id="exampleModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Customer Details Form</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Firstname:</label>
+                                <input type="text" asp-for="FirstName" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>Lastname:</label>
+                                <input type="text" asp-for="LastName" class="form-control" />
+                            </div>
+                            <label>Username:</label>
+                            <input type="text" asp-for="Username" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label>Password:</label>
+                            <input type="text" asp-for="PasswordHash" class="form-control" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" asp-page-handler="users/register">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
