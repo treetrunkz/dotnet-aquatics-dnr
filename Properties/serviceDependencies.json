@@ -5,15 +5,15 @@
       "connectionId": "ConnectionStrings:WebApiDatabase",
       "dynamicId": null
     },
+    "secrets1": {
+      "ignored": "true",
+      "type": "secrets"
+    },
     "sqlite1": {
       "ignored": "true",
       "type": "sqlite",
       "connectionId": "WebApiDatabase",
       "dynamicId": null
-    },
-    "secrets1": {
-      "ignored": "true",
-      "type": "secrets"
     }
   }
 }

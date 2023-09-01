@@ -9,7 +9,6 @@
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
         <PackageReference Include="knockoutjs" Version="3.5.1" />
-        <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.9" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
@@ -22,5 +21,21 @@
         <PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.118" />
         <PackageReference Include="System.Data.SQLite.Core" Version="1.0.118" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.0" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Content\" />
+      <Folder Include="wwwroot\favicon.ico\" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Include="wwwroot\css\site.css" />
+      <None Include="wwwroot\js\AppTest.js" />
+      <None Include="wwwroot\js\_references.js" />
+      <None Include="wwwroot\lib\bootstrap-theme.css" />
+      <None Include="wwwroot\lib\bootstrap-theme.css.map" />
+      <None Include="wwwroot\lib\bootstrap-theme.min.css" />
+      <None Include="wwwroot\lib\bootstrap.css" />
+      <None Include="wwwroot\lib\bootstrap.css.map" />
+      <None Include="wwwroot\lib\bootstrap.min.css" />
+      <None Include="wwwroot\lib\knockout-latest.js" />
     </ItemGroup>
 </Project>

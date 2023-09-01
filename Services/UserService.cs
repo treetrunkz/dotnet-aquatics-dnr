@@ -4,8 +4,6 @@ using AutoMapper;
 using BCrypt.Net;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Results;
 using WebApi.Authorization;
 using WebApi.Entities;
 using WebApi.Helpers;
