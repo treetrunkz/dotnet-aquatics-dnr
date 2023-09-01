@@ -6,15 +6,15 @@ using System.ComponentModel.DataAnnotations;
 public class RegisterRequest
 {
     [Required]
-    [Display(Name = "FirstName")]
+    [Display(Name = "Firstname")]
     public string FirstName { get; set; }
 
     [Required]
-    [Display(Name = "LastName")]
+    [Display(Name = "Lastname")]
     public string LastName { get; set; }
         
     [Required]
-    [Display(Name = "UserName")]
+    [Display(Name = "Username")]
     [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long."), MinLength(6), MaxLength(50) ]
     public string Username { get; set; }
 

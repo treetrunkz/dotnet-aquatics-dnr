@@ -27,13 +27,28 @@ public class UsersController : ControllerBase
         _appSettings = appSettings.Value;
     }
 
+
+
+    //User Login Management Section 
+
     [AllowAnonymous]
     [HttpPost("authenticate")]
     public IActionResult Authenticate(AuthenticateRequest model)
     {
         var response = _userService.Authenticate(model);
+        if(response.Token == null)
+        {
+            return Ok(response);
+        }
+        else
+        {
+            Redirect("/aquatics");
+        }
         return Ok(response);
     }
+
+
+
 
     [AllowAnonymous]
     [HttpPost("register")]
@@ -45,7 +60,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetAll()
+    public ActionResult Aquatics()
     {
         var users = _userService.GetAll();
         return Ok(users);

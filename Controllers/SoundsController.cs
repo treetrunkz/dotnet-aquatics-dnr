@@ -28,8 +28,10 @@ using WebApi.Services;
         }
 
         [HttpGet]
+        [Route("Aquatics")]
         public IActionResult GetSounds(int id) 
         { 
-            var sound = _soundService.GetById(id); return Ok(User);
+            var sound = _soundService.GetById(id); 
+            return Ok(User);
         }
     }

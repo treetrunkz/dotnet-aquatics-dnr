@@ -16,6 +16,10 @@ textarea {
     max-width: 280px;
 }
 
+#msg {
+    visibility: hidden;
+}
+
 .error-messages {
     color: red;
 }

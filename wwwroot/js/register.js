@@ -1,16 +1,19 @@
-﻿function ViewModel() {
+﻿console.log("File Test")
+function ViewModel() {
     var self = this;
 
-    var tokenKey = 'accessToken';
+    var tokenKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJuYmYiOjE2OTMyNTAwODksImV4cCI6MTY5Mzg1NDg4OSwiaWF0IjoxNjkzMjUwMDg5fQ.XEls9WP69PODOTt2ITZFDqtaLjKkX64damLQglwnOhI';
 
     self.result = ko.observable();
     self.user = ko.observable();
 
-    self.registerEmail = ko.observable();
+    self.registerFirstname = ko.observable();
+    self.registerLastname = ko.observable();
+    self.registerUsername = ko.observable();
     self.registerPassword = ko.observable();
-    self.registerPassword2 = ko.observable();
+    self.registerPermission = 1;
 
-    self.loginEmail = ko.observable();
+    self.loginUsername = ko.observable();
     self.loginPassword = ko.observable();
     self.errors = ko.observableArray([]);
 
@@ -23,8 +26,7 @@
             if (response.Message) self.errors.push(response.Message);
             if (response.ModelState) {
                 var modelState = response.ModelState;
-                for (var prop in modelState)
-                {
+                for (var prop in modelState) {
                     if (modelState.hasOwnProperty(prop)) {
                         var msgArr = modelState[prop]; // expect array here
                         if (msgArr.length) {
@@ -50,9 +52,10 @@
 
         $.ajax({
             type: 'GET',
-            url: '/Users',
+            url: '/users',
             headers: headers
         }).done(function (data) {
+            console.log(data);
             self.result(data);
         }).fail(showError);
     }
@@ -61,46 +64,51 @@
         self.result('');
         self.errors.removeAll();
 
-        var auth_data = {
-            Email: self.registerEmail(),
-            Password: self.registerPassword(),
-            ConfirmPassword: self.registerPassword2()
+        var data = {
+            firstname: self.registerFirstname(),
+            lastname: self.registerLastname(),
+            username: self.registerUsername(),
+            password: self.registerPassword(),
+            permission: 111
         };
 
         $.ajax({
             type: 'POST',
-            url: '/Users/Register',
-            data: auth_data
-        }).done(function (_data) {
+            url: '/users/register',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function (data) {
+            self.result(data);
             self.result("Done!");
+            console.log("User Registered!")
+            console.log(data);
         }).fail(showError);
     }
 
     self.login = function () {
-        //self.result('');
-        //self.errors.removeAll();
+        self.result('');
+        self.errors.removeAll();
 
         var loginData = {
-            username: self.loginUsername(),
-            password: self.loginPassword()
+            // grant_type: 'password',
+            Username: self.loginUsername(),
+            Password: self.loginPassword()
         };
+
         console.log(JSON.stringify(loginData))
-
-        var loginData2 = {
-            username: "admin",
-            password: "admin"
-        };
-
-        console.log(JSON.stringify(loginData2));
 
         $.ajax({
             type: 'POST',
-            url: '/Users/Authenticate',
-            data: JSON.stringify(loginData)
+            url: '/users/authenticate',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(loginData),
         }).done(function (data) {
-            console.log(data);
             self.user(data.userName);
+            // Cache the access token in session storage.
             sessionStorage.setItem(tokenKey, data.access_token);
+            console.log("Success! Login Token")
+            console.log("Token Key: " + tokenKey + "\n" + "Access Token: " + data.access_token)
+            window.location.assign('/users/Aquatics')
         }).fail(showError);
     }
 
@@ -114,7 +122,7 @@
 
         $.ajax({
             type: 'POST',
-            url: '/Users/Logout',
+            url: '/users/logout',
             headers: headers
         }).done(function (data) {
             // Successfully logged out. Delete the token.
