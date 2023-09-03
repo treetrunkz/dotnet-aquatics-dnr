@@ -89,6 +89,7 @@ function ViewModel() {
         self.result('');
         self.errors.removeAll();
 
+
         var loginData = {
             // grant_type: 'password',
             Username: self.loginUsername(),
@@ -108,9 +109,11 @@ function ViewModel() {
             sessionStorage.setItem(tokenKey, data.access_token);
             console.log("Success! Login Token")
             console.log("Token Key: " + tokenKey + "\n" + "Access Token: " + data.access_token)
-            window.location.assign('/users/Aquatics')
+            console.log(data);
+            window.location.assign('/aquatics')
         }).fail(showError);
     }
+
 
     self.logout = function () {
         // Log out from the cookie based logon.

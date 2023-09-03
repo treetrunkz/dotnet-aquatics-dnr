@@ -1,0 +1,26 @@
+﻿@model WebApi.Entities.User;
+@using WebApi.Services;
+@using System.Threading.Tasks; 
+
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "../../Views/Shared/_Layout.cshtml";
+}﻿
+@{
+    ViewBag.Title = "Aquatics";
+}
+<h2 style="padding-bottom: 20vh">Aquatics DB</h2>
+
+@{
+    var data = ViewBag.UserData;
+}
+
+    <h2>Welcome @data.FirstName</h2>
+    <p id="permissionValue"style="visibility: hidden">@data.Permission</p>
+  <h6>User Permission: <span data-bind="text: permission"></span></h6>
+  <h6>You are able to: <span data-bind="text: permissionDescription"></span></h6>
+<div>
+
+  @RenderSection("aq_table", required: false)
+
+</div>

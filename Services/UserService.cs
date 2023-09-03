@@ -2,8 +2,10 @@ namespace WebApi.Services;
 
 using AutoMapper;
 using BCrypt.Net;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using WebApi.Authorization;
 using WebApi.Entities;
 using WebApi.Helpers;
@@ -16,6 +18,8 @@ public interface IUserService
     int GetUserPermission(int id);
     void UpdateUserPermission(int id, UpdateRequest model);
     User GetById(int id);
+    //User RetrieveUser();
+    User GetUserId(AuthenticateResponse id);
     void Register(RegisterRequest model);
     void Update(int id, UpdateRequest model);
     void Delete(int id);
@@ -61,10 +65,25 @@ public class UserService : IUserService
         return getUser(id);
     }
 
+    //public User RetrieveUser()
+    //{
+    //    return _context.loggedIn;
+    //}
+
+    public User GetUserId(AuthenticateResponse model)
+    {
+        var user = _context.Users.SingleOrDefault(x => x.Username == model.Username);
+        var userId = user.Id;
+        User userRes = getUser(userId);
+        //_context.loggedIn = userRes;
+        return userRes;
+    }
+
     public int GetUserPermission(int id)
     {
         return getPermission(id);
     }
+
 
     public void Register(RegisterRequest model)
     {
@@ -133,6 +152,12 @@ public class UserService : IUserService
         var user = _context.Users.Find(id);
         if (user == null) throw new KeyNotFoundException("User not found");
         return user;
+    }
+
+    private int getUserIdNum(AuthenticateResponse model)
+    {
+        var num = model.Id;
+        return num;
     }
 
     private int getPermission(int id)

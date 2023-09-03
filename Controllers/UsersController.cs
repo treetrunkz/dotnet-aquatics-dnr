@@ -1,21 +1,27 @@
 ﻿namespace WebApi.Controllers;
 
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System;
 using WebApi.Authorization;
+using WebApi.Entities;
 using WebApi.Helpers;
 using WebApi.Models.Users;
 using WebApi.Services;
 
+
 [Authorize]
 [ApiController]
 [Route("[controller]")]
-public class UsersController : ControllerBase
+public class UsersController : Controller
 {
+    public User loggedInId;
     private IUserService _userService;
     private IMapper _mapper;
     private readonly AppSettings _appSettings;
+
 
     public UsersController(
         IUserService userService,
@@ -27,28 +33,48 @@ public class UsersController : ControllerBase
         _appSettings = appSettings.Value;
     }
 
+    [AllowAnonymous]
+    [Route("/")]
+    public IActionResult Index()
+    {
+        return View("Views/Login/login.cshtml");
+    }
 
+    [AllowAnonymous]
+    [Route("/Aquatics")]
+    public ActionResult Aquatics()
+    {
+        string id = TempData.Peek("first").ToString();
+        int res = Int32.Parse(id);
+        User userdata = _userService.GetById(res);
+        ViewBag.UserData = userdata;
+        return View();
+    }
 
     //User Login Management Section 
 
     [AllowAnonymous]
     [HttpPost("authenticate")]
-    public IActionResult Authenticate(AuthenticateRequest model)
+    public ActionResult Authenticate(AuthenticateRequest model)
     {
+
         var response = _userService.Authenticate(model);
         if(response.Token == null)
         {
             return Ok(response);
         }
+        
         else
         {
-            Redirect("/aquatics");
+            User temp = _userService.GetUserId(response);
+            var send = temp.Id;
+            TempData["first"] = send;
+
+
+            return RedirectToAction("Aquatics");
         }
-        return Ok(response);
+        
     }
-
-
-
 
     [AllowAnonymous]
     [HttpPost("register")]
@@ -57,13 +83,6 @@ public class UsersController : ControllerBase
 
         _userService.Register(model);
         return Ok(new { message = "Registration successful" });
-    }
-
-    [HttpGet]
-    public ActionResult Aquatics()
-    {
-        var users = _userService.GetAll();
-        return Ok(users);
     }
 
     [HttpGet("{id}")]

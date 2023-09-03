@@ -7,11 +7,12 @@ using Microsoft.Extensions.Options;
 using WebApi.Authorization;
 using WebApi.Helpers;
 using WebApi.Services;
+using WebApi.Models.Sounds;
 
     [Authorize]    
     [Route("[controller]")]
     [ApiController]
-    public class SoundsController : ControllerBase
+    public class SoundsController : Controller
     {
         private ISoundService _soundService;
         private IMapper _mapper;
@@ -27,11 +28,20 @@ using WebApi.Services;
             _appSettings = appSettings.Value;
         }
 
+        [AllowAnonymous]
+        [HttpPost("add")]
+        public IActionResult Add(AddRequest model)
+        {
+            _soundService.Add(model);
+            return Ok(new { message = "Adding new record successful" });
+        }
+
         [HttpGet]
-        [Route("Aquatics")]
-        public IActionResult GetSounds(int id) 
-        { 
-            var sound = _soundService.GetById(id); 
-            return Ok(User);
+        [AllowAnonymous]    
+        [Route("/sounds")]
+        public IActionResult GetSounds() 
+        {
+            var sound = _soundService.GetAllSounds();
+            return Ok(sound);
         }
     }
