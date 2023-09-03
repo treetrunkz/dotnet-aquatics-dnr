@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿
+@using WebApi;
+@using WebApi.Entities;
+@using WebApi.Helpers;
+@using WebApi.Services;
+@using static WebApi.Services.UserService;
+@using static WebApi.Services.SoundService;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -47,8 +54,7 @@
         </div>
     </nav>
 
-    <partial name="_CookieConsentPartial" /> 
-
+    <partial name="_CookieConsentPartial" />
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -56,7 +62,9 @@
             <p>&copy; 2023 - Practice Projects Inc.</p>
         </footer>
     </div>
-    <script src="/js/register.js"></script>
-    <script src="/js/AppTest.js"></script>
+    <div id="renderJS">
+        <script src="js/jsManager.js"></script>
+    </div>
+
 </body>
 </html>

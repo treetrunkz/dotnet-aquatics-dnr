@@ -7,6 +7,8 @@ public class DataContext : DbContext
 {
     protected readonly IConfiguration Configuration;
 
+    //public User loggedIn { get; set; }
+
     public DbSet<User> Users { get; set; }
 
     public DbSet<Sound> Sounds { get; set; }

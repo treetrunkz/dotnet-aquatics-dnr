@@ -1,0 +1,62 @@
+﻿@model WebApi.Entities.User
+@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+	Layout = "../../Views/Shared/_Layout.cshtml";
+}﻿
+    <div class="col-sm-4">
+        <h3>Log In</h3>
+        <form id="loginForm" data-bind="submit: login">
+            <div id="msg">
+                <ul style="color:red; visibility:hidden">Invalid Username or Password</ul>
+            </div>
+            <div class="form-group">
+                <label>Username</label>
+                <input class="form-control" type="text" data-bind="value: loginUsername" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input class="form-control" type="password" data-bind="value: loginPassword" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">Log In</button>
+                <button type="button" data-bind="click: logout" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Register</button>
+            </div>
+        </form>
+    <form data-bind="submit: register" method="post">
+        <div id="exampleModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Associate Details Form</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Firstname:</label>
+                                <input type="text" asp-for="FirstName" class="form-control" data-bind="value: registerFirstname" />
+                            </div>
+                            <div class="form-group">
+                                <label>Lastname:</label>
+                                <input type="text" asp-for="LastName" class="form-control" data-bind="value: registerLastname" />
+                            </div>
+                            <label>Username:</label>
+                            <input type="text" asp-for="Username" class="form-control" data-bind="value: registerUsername"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Password:</label>
+                            <input type="text" asp-for="PasswordHash" class="form-control" data-bind="value: registerPassword"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    </div>
+

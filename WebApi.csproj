@@ -5,6 +5,9 @@
         <UserSecretsId>7e9c4d85-fc14-461d-b56f-77b043473941</UserSecretsId>
     </PropertyGroup>
     <ItemGroup>
+      <Content Remove="wwwroot\js\file.ts" />
+    </ItemGroup>
+    <ItemGroup>
         <PackageReference Include="AutoMapper" Version="11.0.0" />
         <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
@@ -20,7 +23,7 @@
         <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
         <PackageReference Include="Stub.System.Data.SQLite.Core.NetStandard" Version="1.0.118" />
         <PackageReference Include="System.Data.SQLite.Core" Version="1.0.118" />
-        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.0" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.32.2" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Content\" />
