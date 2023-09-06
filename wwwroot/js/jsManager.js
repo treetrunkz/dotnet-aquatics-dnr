@@ -12,7 +12,7 @@ if (x == "/") {
     js.src = "js/register.js";
 }
 
-if (x == "/aquatics") {
+if (x == "/aquatics" || x == "/immutableTemplate" || x == "/mutableTemplate") {
     js.src = "js/database.js";
 }
 

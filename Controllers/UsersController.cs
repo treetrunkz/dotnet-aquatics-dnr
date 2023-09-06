@@ -105,4 +105,12 @@ public class UsersController : Controller
         _userService.Delete(id);
         return Ok(new { message = "User deleted successfully" });
     }
+
+    [HttpGet]
+    public IActionResult GetAll()
+    {
+        var users = _userService.GetAll();
+        return Ok(users);
+    }
+
 }

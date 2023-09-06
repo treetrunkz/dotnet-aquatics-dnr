@@ -1,0 +1,28 @@
+﻿
+<script type="text/html" id="editTemplate">
+    <table>
+        <tr>
+        <td>
+            <input type="text" data-bind="value: $data.EmpNo" id="txteno" disabled="disabled" />
+        </td>
+        <td>
+            <input type="text" data-bind="value: $data.EmpName" id="txtename" />
+        </td>
+        <td>
+            <input type="text" data-bind="value: $data.DeptName" id="txtdname" />
+        </td>
+        <td>
+            <input type="text" data-bind="value: $data.Designation" id="txtdesig" />
+        </td>
+        <td>
+            <input type="text" data-bind="value: $data.Salary" id="txtsal" />
+        </td>
+        <td>
+            <input type="button" value="Save" data-bind="click: EmpViewModel.saveEmployee" />
+        </td>
+        <td>
+            <input type="button" value="Cancel" data-bind="click: function () { EmpViewModel.reset(); }" />
+        </td>
+        </tr>
+    </table>
+</script>

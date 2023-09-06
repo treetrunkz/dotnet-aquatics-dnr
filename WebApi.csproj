@@ -5,6 +5,8 @@
         <UserSecretsId>7e9c4d85-fc14-461d-b56f-77b043473941</UserSecretsId>
     </PropertyGroup>
     <ItemGroup>
+      <Content Remove="Views\Shared\immutableTemplate.cshtml" />
+      <Content Remove="Views\Shared\mutableTemplate.cshtml" />
       <Content Remove="wwwroot\js\file.ts" />
     </ItemGroup>
     <ItemGroup>
@@ -26,10 +28,11 @@
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.32.2" />
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Content\" />
       <Folder Include="wwwroot\favicon.ico\" />
     </ItemGroup>
     <ItemGroup>
+      <None Include="Views\Shared\immutableTemplate.cshtml" />
+      <None Include="Views\Shared\mutableTemplate.cshtml" />
       <None Include="wwwroot\css\site.css" />
       <None Include="wwwroot\js\AppTest.js" />
       <None Include="wwwroot\js\_references.js" />

@@ -1,7 +1,6 @@
 ﻿namespace WebApi.Services;
 
 using AutoMapper;
-using BCrypt.Net;
 using WebApi.Authorization;
 using WebApi.Entities;
 using WebApi.Helpers;
@@ -19,16 +18,16 @@ public interface ISoundService
 public class SoundService : ISoundService
 {
     private DataContext _context;
-    private IJwtUtils _jwtUtils;
+    //private IJwtUtils _jwtUtils;
     private readonly IMapper _mapper;
 
     public SoundService(
         DataContext context,
-        IJwtUtils jwtUtils,
+        //IJwtUtils jwtUtils,
         IMapper mapper)
     {
         _context = context;
-        _jwtUtils = jwtUtils;
+        //_jwtUtils = jwtUtils;
         _mapper = mapper;
     }
 
@@ -75,7 +74,6 @@ public class SoundService : ISoundService
     }
 
     // helper methods
-
     private Sound getSound(int id)
     {
         var sound = _context.Sounds.Find(id);

@@ -65,11 +65,6 @@ public class UserService : IUserService
         return getUser(id);
     }
 
-    //public User RetrieveUser()
-    //{
-    //    return _context.loggedIn;
-    //}
-
     public User GetUserId(AuthenticateResponse model)
     {
         var user = _context.Users.SingleOrDefault(x => x.Username == model.Username);
@@ -83,7 +78,6 @@ public class UserService : IUserService
     {
         return getPermission(id);
     }
-
 
     public void Register(RegisterRequest model)
     {

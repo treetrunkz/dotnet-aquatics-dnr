@@ -16,6 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
     else
         services.AddDbContext<DataContext>();
 
+
     services.AddMvc();
     services.AddControllers();
     services.AddRazorPages();
@@ -31,6 +32,7 @@ var builder = WebApplication.CreateBuilder(args);
     // configure DI for application services
     services.AddScoped<IJwtUtils, JwtUtils>();
     services.AddScoped<IUserService, UserService>();
+    services.AddScoped<ISoundService, SoundService>();
 }
 
 var app = builder.Build();

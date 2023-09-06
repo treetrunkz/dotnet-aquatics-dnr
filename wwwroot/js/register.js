@@ -89,9 +89,7 @@ function ViewModel() {
         self.result('');
         self.errors.removeAll();
 
-
         var loginData = {
-            // grant_type: 'password',
             Username: self.loginUsername(),
             Password: self.loginPassword()
         };

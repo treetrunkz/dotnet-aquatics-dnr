@@ -23,3 +23,8 @@ textarea {
 .error-messages {
     color: red;
 }
+
+.hide {
+    visibility: hidden;
+    position: relative;
+}
