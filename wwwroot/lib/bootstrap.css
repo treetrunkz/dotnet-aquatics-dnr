@@ -776,7 +776,8 @@ th {
 .glyphicon-record:before {
   content: "\e165";
 }
-.glyphicon-save:before {
+.glyphicon-
+:before {
   content: "\e166";
 }
 .glyphicon-open:before {

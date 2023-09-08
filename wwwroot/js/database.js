@@ -1,36 +1,8 @@
 ﻿function ViewModel() {
-    //think about taking in two parameters one for user the other for sound, then using
-    //the data to cover all of the data needs of the whole page.
-
-    //============= Authorization ================//
-    self = this;
-    self.permission = ko.observable();
-    self.permissionDescription = ko.observable();
-    self.result = ko.observable();
-    self.user = ko.observable();
-    self.errors = ko.observableArray([]);
 
     //JWT Authorization Token
     var tokenKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJuYmYiOjE2OTMyNTAwODksImV4cCI6MTY5Mzg1NDg4OSwiaWF0IjoxNjkzMjUwMDg5fQ.XEls9WP69PODOTt2ITZFDqtaLjKkX64damLQglwnOhI';
 
-    var permissionValue = document.querySelector("#permissionValue").innerHTML;
-    console.log(permissionValue);
-
-    if (permissionValue == 111) { // Ignore values with no space character
-        console.log("admin permission");
-       self.permission("Administrator"); 
-       self.permissionDescription("You have privelages required to create, update, or delete any database records."); 
-    }
-    if (permissionValue == 1) {
-        console.log("guest permission");
-       self.permission("Guest");
-       self.permissionDescription("You are a guest you may only view the data tables.");
-    }
-    if (permissionValue == 0) {
-        console.log("no permission");
-       self.permission("No Permissions");
-       self.permissionDescription("You have no permissions and may not view the data.");
-    }
 
 
     function showError(jqXHR) {
@@ -82,7 +54,7 @@
             type: 'GET',
             url: '/sounds',
             headers: headers
-        }).done(function (data) {
+        }).done(function(data) {
             console.log(data);
             sounds(data);
         }).fail(showError);
@@ -110,6 +82,33 @@
         self.dbTopography = ko.observable();
 
 
+        function Sound(id, permissionReq, name, coordinatex, coordinatey,
+        width, depth, wildlife, biome, waterhealth, speed,
+        currents, tides, invasivespecies, residential, publiclands, topography) {
+        return {
+            dbId: ko.observable(id),
+            dbPermissionReq: ko.observable(permissionReq),
+            dbName: ko.observable(name),
+
+            dbCoordinateX: ko.observable(coordinatex),
+            dbCoordinateY: ko.observable(coordinatey),
+            dbWidthM: ko.observable(width),
+            dbDepthM: ko.observable(depth),
+            dbWildlife: ko.observable(wildlife),
+
+            dbBiome: ko.observable(biome),
+            dbWaterHealth: ko.observable(waterhealth),
+            dbSpeed: ko.observable(speed),
+            dbCurrents: ko.observable(currents),
+            dbTides: ko.observable(tides),
+
+            dbInvasiveSpecies: ko.observable(invasivespecies),
+            dbIsResidential: ko.observable(residential),
+            dbIsPublicLands: ko.observable(publiclands),
+            dbTopography: ko.observable(topography)
+        }
+    }
+
     self.addRecord = function () {
         self.result('');
         self.errors.removeAll();
@@ -133,12 +132,12 @@
             isPublicLands: self.dbIsPublicLands,
             topography: self.dbTopography
         };
-
+        console.log(Sound(data));
         $.ajax({
             type: 'POST',
             url: '/sounds/add',
             contentType: 'application/json; charset=utf-8',
-            data: data
+            data: Sound(data)
         }).done(function (data) {
             self.result(data);
             self.result("Done!");

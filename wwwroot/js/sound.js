@@ -1,7 +1,9 @@
 ﻿var self = this;
 
 //S1:Boolean to check wheather the operation is for Edit and New Record
-var IsNewRecord = false;
+var isNewRecord = false;
+
+cord = false;
 self.Employees = ko.observableArray([]);
 loadEmployees();
 
@@ -46,7 +48,7 @@ EmpViewModel.currentTemplate = function (tmpl) {
 EmpViewModel.addnewRecord = function () {
     alert("Add Called");
     self.Employees.push(new Employee(0, "", "", "", 0.0));
-    IsNewRecord = true; //Set the Check for the New Record
+    isNewRecord = true; //Set the Check for the New Record
 };
 
 //S7:Method to Save the Record (This is used for Edit and Add New Record)
@@ -59,7 +61,7 @@ EmpViewModel.saveEmployee = function (d) {
     Emp.Salary = d.Salary;
 
     //Edit the Record
-    if (IsNewRecord === false) {
+    if (isNewRecord === false) {
         $.ajax({
             type: "PUT",
             url: "api/EmployeeInfoAPI/" + Emp.EmpNo,
@@ -74,8 +76,8 @@ EmpViewModel.saveEmployee = function (d) {
     }
 
     //The New Record
-    if (IsNewRecord === true) {
-        IsNewRecord = false;
+    if (isNewRecord === true) {
+        isNewRecord = false;
         $.ajax({
             type: "POST",
             url: "api/EmployeeInfoAPI",
