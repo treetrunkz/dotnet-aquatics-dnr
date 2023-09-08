@@ -1,33 +1,51 @@
 ﻿console.log("manager load success!");
 
-var divParent = document.getElementById("renderJS");
-var js = document.createElement("script");
-
 let x = location.pathname;
-console.log(x);
-js.type = "text/javascript";
-console.log(x == "/aquatics")
+var divParent = document.getElementById("renderJS");
 
-if (x == "/") {
-    js.src = "js/register.js";
+if (x = "/") {
+    jshome = document.createElement("script");
+    jshome.type = "text/javascript";
+    jshome.src = "js/register.js";
+    divParent.appendChild(jshome);
 }
 
-if (x == "/aquatics" || x == "/immutableTemplate" || x == "/mutableTemplate") {
-    js.src = "js/database.js";
+
+if (x = "/aquatics" || x == "/immutableTemplate" || x == "/mutableTemplate") {
+    filename = document.createElement("script");
+    filename.type = "text/javascript";
+    filename.src = "/js/addRecord.js";
+    divParent.appendChild(filename);
 }
+    
 
-divParent.appendChild(js);
-//if (currentLocation.pathName = '/') {
-//    console.log("run1");
-//}
-//if (currentLocation.pathname = '/Aquatics') {
-//    console.log("run2");
-//}
-//if (currentLocation.pathname = '/') {
-//    js.src = "js/register.js";
-//}
-//if (currentLocation.pathname = ("/aquatics")) {
-//    js.src = "js/database.js";
-//}
 
-/*divParent.appendChild(js);*/
+//function jsManager(d) {
+
+//    let x = location.pathname;
+//    var divParent = document.getElementById("renderJS");
+
+//    console.log(x);
+
+//    if (d > 4) {
+//        throw ErrorEvent("Not enough files to load!");
+//    };
+
+//    var ls = ["js/addRecord.js", "js/database.js", "js/register.js", "js/immutableTemplate.js", "js/mutableTemplate.js"];
+//    if (x = "/") {
+//        jshome = document.createElement("script");
+//        jshome.type = "text/javascript";
+//        jshome.src = "js/register.js";
+//        divParent.appendChild(jshome);
+//    }
+//    if (x = "/aquatics" || x == "/immutableTemplate" || x == "/mutableTemplate") {
+//        for (x in Array.from(d)) {
+//            var filename = "js" + x;
+//            filename = document.createElement("script");
+//            filename.type = "text/javascript";
+//            filename.src = ls[x];
+//            divParent.appendChild(filename);
+//        }
+//        return;
+//    }
+//}

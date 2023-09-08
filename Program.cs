@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 using WebApi.Authorization;
 using WebApi.Helpers;
 using WebApi.Services;
@@ -61,5 +63,6 @@ using (var scope = app.Services.CreateScope())
 
     app.MapControllers();
 }
+
 
 app.Run("http://localhost:4000");

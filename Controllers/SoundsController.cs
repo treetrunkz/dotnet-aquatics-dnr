@@ -14,18 +14,17 @@ using WebApi.Models.Sounds;
 public class SoundsController : Controller
 {
     private ISoundService _soundService;
-    //private IMapper _mapper;
-    //private readonly AppSettings _appSettings;
+    private IMapper _mapper;
+    private readonly AppSettings _appSettings;
 
     public SoundsController(
-        ISoundService soundService)
-        //,
-        //IMapper mapper,
-        //IOptions<AppSettings> appSettings)
+        ISoundService soundService,
+        IMapper mapper,
+        IOptions<AppSettings> appSettings)
     {
         _soundService = soundService;
-        //_mapper = mapper;
-        //_appSettings = appSettings.Value;
+        _mapper = mapper;
+        _appSettings = appSettings.Value;
     }
 
     [HttpDelete("{id}")]
