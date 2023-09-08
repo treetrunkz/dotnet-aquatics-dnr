@@ -27,6 +27,7 @@ public class SoundsController : Controller
         _appSettings = appSettings.Value;
     }
 
+    [AllowAnonymous]
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
@@ -34,6 +35,7 @@ public class SoundsController : Controller
         return Ok(new { message = "Sucessfully deleted record!" });
     }
 
+    [AllowAnonymous]
     [HttpPut("{id}")]
     public IActionResult Update(int id, UpdateRequest model)
     {

@@ -9,6 +9,17 @@
     padding-right: 15px;
 }
 
+img#deletepng {
+    width: 33px;
+    position: relative;
+    vertical-align: middle;
+    border-style: none;
+}
+
+#deletepng {
+    width: 33px;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -28,3 +39,15 @@ textarea {
     visibility: hidden;
     position: relative;
 }
+
+img#deleteImg {
+    width: 33px;
+    position: relative;
+    vertical-align: middle;
+    border-style: none;
+}
+
+#deleteImg {
+    width: 33px;
+}
+

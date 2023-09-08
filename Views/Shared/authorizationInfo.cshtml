@@ -7,10 +7,11 @@
     var data = ViewBag.UserData;
 }
 <div id="authorization">
-<h2>Welcome @data.FirstName</h2>
-<p id="permissionValue" style="visibility: hidden">@data.Permission</p>
-<h6>User Permission: <span data-bind="text: permission"></span></h6>
-<h6>You are able to: <span data-bind="text: permissionDescription"></span></h6>
+<h2>Welcome @data.FirstName @data.LastName</h2>
+
+<p id="permissionValue" hidden class="">@data.Permission</p>
+<h6 class="text-muted">User Permission: <span class="text-muted" data-bind="text: permission"></span></h6>
+<h6 class="text-muted">You are able to: <span data-bind="text: permissionDescription"></span></h6>
 </div>
 
-<script src="js/authorizationInfo.js"></script>
+<script src="js/authorization.js"></script>

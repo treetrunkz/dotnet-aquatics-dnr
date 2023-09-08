@@ -1,4 +1,15 @@
-﻿var tokenKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJuYmYiOjE2OTMyNTAwODksImV4cCI6MTY5Mzg1NDg4OSwiaWF0IjoxNjkzMjUwMDg5fQ.XEls9WP69PODOTt2ITZFDqtaLjKkX64damLQglwnOhI';
+﻿/**
+ * =========================================================================================================
+ * 
+ * @Author           Ellie Seraphine
+ * @version          1.0.0
+ * @project          Aquatics Inventory Management System
+ * 
+ * @file ajax-handler.js 
+ * manages the loading of javascript files based on the view.
+ * 
+ * =========================================================================================================
+ */
 
 var self = this;
 
@@ -8,7 +19,12 @@ var selfId = 0;
 
 isNewRecord = false;
 
-console.log(num);
+/**
+ * Returns errors to the user from JavaScript Web Token (JWT) authorization helpers.
+ *
+ * @param {string} jqXHR HTML response.
+ * @return {string} error / success message.
+ */
 
 function showError(jqXHR) {
 
@@ -41,6 +57,11 @@ permissionInt = ko.observable(permissionValue);
 self.sounds = ko.observableArray();
 loadDB();
 
+/**
+ * Object function to facilitate DTO (Data Transfer Object) for the Sound model. DTO is not needed for loading of the database.
+ *
+ * @return {Object} DTO which matches the Sound model.
+ */
 
 function Sound(name, coordinate_X, coordinate_Y, width_m, depth_m, wildlife, biome, waterHealth, speed, currents, tides, invasiveSpecies, isResidential, isPublicLands, topography)
 {
@@ -67,44 +88,73 @@ function Sound(name, coordinate_X, coordinate_Y, width_m, depth_m, wildlife, bio
     }
 }
 
-
+/**
+ * Leads Database to DOM only. Uses observable array to hold the JSON object used to update DOM.
+ *
+ * @param {number} x The number to raise.
+ * @param {number} n The power, must be a natural number.
+ * @return {number} x raised to the n-th power.
+ */
 function loadDB() {
     this.result = ''
     self.errors.removeAll();
 
-    var token = sessionStorage.getItem(tokenKey);
-    var headers = {};
-    if (token) {
-        headers.Authorization = 'Bearer ' + token;
-    }
-
     $.ajax({
         type: 'GET',
         url: '/sounds',
-        headers: headers
     }).done(function (data) {
         console.log(data);
         selfid = data.length + 1;
         console.log(selfid)
         sounds(data);
     }).fail(showError);
-}
+};
 
-
+/**
+ * KnockoutJS ViewModel containing different views. Currently, using one view.
+ */
 var ViewModel = {
     editView: ko.observable("")
 };
 
+/**
+ * addRecord helper function to add a record to the database and define it's a new record.
+ */
 ViewModel.addRecord = function () {
     var setSound = new Sound("", 0, 0, 0, 0, "", "", "", 0, "", "", "", false, false, "");
     sounds.push(setSound);
     isNewRecord = true;
 };
 
+/**
+ * Delete a record, refresh the ViewModel keeping the view up to date..
+ *
+ * @param {number} d ID to use the UserServices to delete the record.
+ * @return {void} updated data view, with deleted record removed.
+ */
+function deleteRecord (d) {
+
+    $.ajax({
+        type: "DELETE",
+        url: "sounds/" + d
+    }).done(function (data) {
+        console.log("Record Deleted Successfully " + data.status);
+        ViewModel.reset();
+        loadDB();
+    }).fail(function (err) {
+        console.log(err.status);
+        ViewModel.reset();
+    });
+};
+
+/**
+ * Edits a record, refresh the ViewModel keeping the view up to date..
+ * This function is not currently used.
+ * 
+ * @return {void} updated data view, with compatible input.
+ */
 ViewModel.editRecord = function (d) {
-
     var editSound = SoundService.GetById(d);
-
     var Edit = {};
     Edit.PermissionReq = 1;
     Edit.Name = editSound.Name;
@@ -122,11 +172,14 @@ ViewModel.editRecord = function (d) {
     Edit.IsResidential = editSound.IsResidential;
     Edit.IsPublicLands = editSound.IsPublicLands;
     Edit.Topography = editSound.Topography;
-
-
 };
 
-
+/**
+ * Saves record, converting "true" and "false" strings to booleans
+ * Depending on @isNewRecord either POST or PUT is used.(Add/Edit)
+ *
+ * @return {void} New record.
+ */
 ViewModel.saveRecord = function (d) {
     var Sou = {};
     Sou.PermissionReq = 1;
@@ -146,10 +199,7 @@ ViewModel.saveRecord = function (d) {
     Sou.IsPublicLands = d[13].value;
     Sou.Topography = d[14].value;
 
-
     var res = JSON.stringify(Sou).replace(/:[ ]*"(true|false)"/g, ':$1');
-    
-    console.log("result: " + res);
 
     if (isNewRecord === false) {
         $.ajax({
@@ -169,10 +219,8 @@ ViewModel.saveRecord = function (d) {
 
     if (isNewRecord === true) {
         isNewRecord = false;
-        console.log("New Record: " + res);
 
         tal = JSON.parse(res);
-        console.log(tal);
 
         $.ajax({
             type: "POST",
@@ -183,26 +231,11 @@ ViewModel.saveRecord = function (d) {
             console.log("Record Added Successfully " + data.status);
             ViewModel.reset();
             loadDB();
-            closeOutForm();
         }).fail(function (err) {
             console.log("Error Occured, Please Reload the Page and Try Again " + err.status);
             ViewModel.reset();
         });
     };
-};
-
-ViewModel.deleteRecord = function (id) {
-    $.ajax({
-        type: "DELETE",
-        url: "sounds/delete/" + id
-    }).done(function (data) {
-        console.log("Record Deleted Successfully " + data.status);
-        ViewModel.reset();
-        loadDB();
-    }).fail(function (err) {
-        console.log(err.status);
-        ViewModel.reset();
-    });
 };
 
 ViewModel.reset = function (t) {
