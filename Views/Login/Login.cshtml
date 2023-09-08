@@ -3,6 +3,7 @@
 @{
     Layout = "../../Views/Shared/_Layout.cshtml";
 }﻿
+<div class="w-auto container d-flex align-items-center justify-content-center">
 <div class="col-sm-4">
     <h3>Log In</h3>
     <form id="loginForm" data-bind="submit: login">
@@ -19,7 +20,7 @@
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-default">Log In</button>
-            <button type="button" data-bind="click: logout" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Register</button>
+            <button type="button" data-bind="click: logout" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Register</button>
         </div>
     </form>
     <form data-bind="submit: register" method="post">
@@ -28,7 +29,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Associate Details Form</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -47,16 +48,17 @@
                         </div>
                         <div class="form-group">
                             <label>Password:</label>
-                            <input type="text" asp-for="PasswordHash" class="form-control" data-bind="value: registerPassword" />
+                            <input type="password" asp-for="PasswordHash" class="form-control" data-bind="value: registerPassword" />
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <div class="modal-footer pl-4 justify-content-center">
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </form>
+</div>
 </div>
 <script src="js/register.js"></script>
