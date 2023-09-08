@@ -1,4 +1,20 @@
-﻿console.log("File Test")
+﻿/**
+ * =========================================================================================================
+ * 
+ * @Author          Ellie Seraphine
+ * @version         1.2.0
+ * @project         Aquatics Inventory Management System
+ * 
+ * @file authorization.js 
+ * Auth requirements are implemented with the help of the dependecy injection in Program.cs, 
+ * UserService, and the User Controller. KnockoutJS receives one-way binding from the user. It is bound 
+ * to the SQL Server Database and DOM elements based on input validation.
+ * 
+ * Note: Input validation is not implemented in this version.
+ * 
+ * =========================================================================================================
+ */
+
 function ViewModel() {
     var self = this;
 
@@ -55,7 +71,6 @@ function ViewModel() {
             url: '/users',
             headers: headers
         }).done(function (data) {
-            console.log(data);
             self.result(data);
         }).fail(showError);
     }
@@ -79,9 +94,7 @@ function ViewModel() {
             data: JSON.stringify(data)
         }).done(function (data) {
             self.result(data);
-            self.result("Done!");
             console.log("User Registered!")
-            console.log(data);
         }).fail(showError);
     }
 
@@ -94,8 +107,7 @@ function ViewModel() {
             Password: self.loginPassword()
         };
 
-        console.log(JSON.stringify(loginData))
-
+        //AJAX call to authenticate user and change view to aquatics
         $.ajax({
             type: 'POST',
             url: '/users/authenticate',
@@ -106,8 +118,6 @@ function ViewModel() {
             // Cache the access token in session storage.
             sessionStorage.setItem(tokenKey, data.access_token);
             console.log("Success! Login Token")
-            console.log("Token Key: " + tokenKey + "\n" + "Access Token: " + data.access_token)
-            console.log(data);
             window.location.assign('/aquatics')
         }).fail(showError);
     }

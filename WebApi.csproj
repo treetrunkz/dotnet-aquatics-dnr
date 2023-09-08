@@ -34,8 +34,6 @@
       <None Include="Views\Shared\immutableTemplate.cshtml" />
       <None Include="Views\Shared\mutableTemplate.cshtml" />
       <None Include="wwwroot\css\site.css" />
-      <None Include="wwwroot\js\AppTest.js" />
-      <None Include="wwwroot\js\_references.js" />
       <None Include="wwwroot\lib\bootstrap-theme.css" />
       <None Include="wwwroot\lib\bootstrap-theme.css.map" />
       <None Include="wwwroot\lib\bootstrap-theme.min.css" />
