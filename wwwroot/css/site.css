@@ -20,6 +20,10 @@ img#deletepng {
     width: 33px;
 }
 
+#databaseManagement {
+    max-height: 500px;
+    max-width: 1326px;
+}
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
@@ -50,4 +54,3 @@ img#deleteImg {
 #deleteImg {
     width: 33px;
 }
-

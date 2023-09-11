@@ -106,6 +106,7 @@ public class UsersController : Controller
         return Ok(new { message = "User deleted successfully" });
     }
 
+    [AllowAnonymous]
     [HttpGet]
     public IActionResult GetAll()
     {

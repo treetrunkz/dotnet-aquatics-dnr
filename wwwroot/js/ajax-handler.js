@@ -131,9 +131,10 @@ ViewModel.addRecord = function () {
  *
  * @param {number} d ID to use the UserServices to delete the record.
  * @return {void} updated data view, with deleted record removed.
+ * verify post comes back from the user with authorization. generate random string
+ * randomly gen string for user verification for each page loaded.
  */
 function deleteRecord (d) {
-
     $.ajax({
         type: "DELETE",
         url: "sounds/" + d
