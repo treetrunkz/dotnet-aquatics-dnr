@@ -34,7 +34,7 @@
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.32.2" />
     </ItemGroup>
     <ItemGroup>
-      <None Include="wwwroot\css\site.css" />
+      <None Include="wwwroot\css\Site.css" />
       <None Include="wwwroot\lib\bootstrap-theme.css" />
       <None Include="wwwroot\lib\bootstrap-theme.css.map" />
       <None Include="wwwroot\lib\bootstrap-theme.min.css" />
