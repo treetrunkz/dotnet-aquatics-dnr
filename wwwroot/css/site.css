@@ -1,8 +1,6 @@
 ﻿
 /* Set padding to keep content from hitting the edges */
 
-
-
 img#deletepng {
     width: 33px;
     position: relative;
@@ -14,6 +12,10 @@ img#deletepng {
     width: 33px;
 }
 
+.shadow {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.5) !important
+}
+
 table.table.w-auto.table-responsive.table-hover.pl-2 {
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -23,9 +25,14 @@ table.table.w-auto.table-responsive.table-hover.pl-2 {
 tbody, td, tfoot, th, thead, tr:hover {
     background-color: blue;
 }
+
 /* Set width on the form input elements since they're 100% wide by default */
 #msg {
     visibility: hidden;
+}
+
+#map {
+    height: 180px;
 }
 
 .error-messages {
