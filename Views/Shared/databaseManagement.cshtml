@@ -1,11 +1,11 @@
 ﻿<div id="databaseManagement">
 
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary my-4" data-bs-toggle="modal" data-bind="click: ViewModel.addRecord" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary my-4" data-bs-toggle="modal" data-bind="click: ViewModel.addRecord" data-bs-target="#Modal">
         Add New Record
     </button>
 
-    <div id="exampleModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div id="Modal" class="modal fade" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -15,7 +15,6 @@
                     </button>
                 </div>
                 <div class="modal-body px-5 pt-5">
-                    @* data-bind="submit: addRecord" *@
                     <form data-bind="submit:ViewModel.saveRecord" method="post" class="w-auto">
                         <div class="form-row justify-content-md-center">
                             <div class="col-md-10 col-lg-4 form-group">
@@ -113,20 +112,20 @@
         <thead id="dt_head" class="sticky-top shadow-lg p-3 mb-5 bg-body rounded">
             <tr>
                 <th id="dt_th" class="align-middle col-sm-2 rounded-top-4 rounded-end-0" style="background-color: #51c7f3"><span class="pl-5">Name</span></th>
-                <th class="text-center align-middle" style="background-color: #42c1f4"><span id="th_span">Latitude</span></th>
-                <th class="text-center align-middle" style="background-color: #44bbf3"><span id="th_span">Longitude</span></th>
-                <th class="text-center align-middle" style="background-color: #41b5f2"><span id="th_span">Width (meters)</span></th>
-                <th class="text-center align-middle" style="background-color: #3ea4e4"><span id="th_span">Depth (meters)</span></th>
-                <th class="text-center align-middle" style="background-color: #3ea4e4"><span id="th_span">Wildlife</span></th>
-                <th class="text-center align-middle" style="background-color: #3d96da"><span id="th_span">Biome</span></th>
-                <th class="text-center align-middle" style="background-color: #3d96da"><span id="th_span">Water Health</span></th>
-                <th class="text-center align-middle" style="background-color: #3c89d1"><span id="th_span">Wind Speed</span></th>
-                <th class="text-center align-middle" style="background-color: #3c89d1"><span id="th_span">Water Currents</span></th>
-                <th class="text-center align-middle" style="background-color: #397bc7"><span id="th_span">Tide</span></th>
-                <th class="text-center align-middle" style="background-color: #376ec0"><span id="th_span">Invasive Species</span></th>
-                <th class="text-center align-middle" style="background-color: #3461b6"><span id="th_span">Residential Land</span></th>
-                <th class="text-center align-middle" style="background-color: #3148a6"><span id="th_span">Public Land</span></th>
-                <th class="text-center align-middle" style="background-color: #3148a6"><span id="th_span"></span>Topography Map</span></th>
+                <th class="text-center text-white palign-middle" style="background-color: #42c1f4"><span id="th_span">Latitude</span></th>
+                <th class="text-center text-white align-middle" style="background-color: #44bbf3"><span id="th_span">Longitude</span></th>
+                <th class="text-center text-white align-middle" style="background-color: #41b5f2"><span id="th_span">Width (meters)</span></th>
+                <th class="text-center text-white align-middle" style="background-color: #3ea4e4"><span id="th_span">Depth (meters)</span></th>
+                <th class="text-center text-white align-middle" style="background-color: #3ea4e4"><span id="th_span">Wildlife</span></th>
+                <th class="text-center text-white align-middle" style="background-color: #3d96da"><span id="th_span">Biome</span></th>
+                <th class="text-center text-white align-middle" style="background-color: #3d96da"><span id="th_span">Water Health</span></th>
+                <th class="text-center text-white align-middle" style="background-color: #3c89d1"><span id="th_span">Wind Speed</span></th>
+                <th class="text-center text-white align-middle" style="background-color: #3c89d1"><span id="th_span">Water Currents</span></th>
+                <th class="text-center text-white align-middle" style="background-color: #397bc7"><span id="th_span">Tide</span></th>
+                <th class="text-center text-white align-middle" style="background-color: #376ec0"><span id="th_span">Invasive Species</span></th>
+                <th class="text-center text-white align-middle" style="background-color: #3461b6"><span id="th_span">Residential Land</span></th>
+                <th class="text-center text-white align-middle" style="background-color: #3148a6"><span id="th_span">Public Land</span></th>
+                <th class="text-center text-white align-middle" style="background-color: #3148a6"><span id="th_span"></span>Topography Map</span></th>
                 <th class="rounded-top-4 rounded-start-0" style="background-color: #3148a6"></th>
             </tr>
         </thead>
