@@ -74,10 +74,7 @@ function loadMapCoords() {
     }).fail(showError);
     //var boundaries = new L.geoJson();
     //boundaries.addTo(map);
-    loadGeoLayer();
 };
-
-
 
 //L.geoJSON(myLines, {
 //    style: myStyle
@@ -86,43 +83,50 @@ function loadMapCoords() {
 
 
 function loadGeoLayer() {
-    console.log("Geo Layer Test");
-
     var boundaryList = ['admiralty_inlet.json', 'central_puget_sound.json', 'east_straight_of_juan_de_fuca.json', 'hood_canal.json', 'san_juan_archipelago.json', 'south_puget_sound.json', 'strait_of_georgia.json', 'west_strait_of_juan_de_fuca.json', 'whidbey_basin.json'];
 
-    var geoBoundaries = new L.geoJson();
-    geoBoundaries.addTo(map);
+    console.log("Geo Layer Test");
+    //var geoBoundaries = new L.geoJson(false, {
+    //    style: function (feature) {
+    //        console.log(feature);
+    //        myStyle = {
+    //            "color": feature.color,
+    //            "weight": 2,
+    //            "opacity": .6
+    //        }
+    //        return myStyle;
+    //    }
+    //});
+    //geoBoundaries.addTo(map);
 
     boundaryList.forEach((x) => {
 
         console.log(x);
+
         $.ajax({
             datatype: "json",
             url: '/geojson/' + x,
             success: function (data) {
                 $(data.features).each(function (key, data) {
-                    console.log(data.color);
-                    //this gets stopped when there is an undefined color
-                    if (data.color == undefined) {
-                        data.color = "#17202a"
-                    }
-                    geoStyle = {
-                        "color": data.color,
-                        "weight": 2,
-                        "opacity": .6
-                    }
-                    var prem = new L.geoJson(false, {
-                        style: geoStyle
-                    })
+                    var boundaries = new L.geoJson(false, {
 
-                    prem.addData(data);
-                    prem.addTo(map);
-                    
-                });
+                        style: function (feature) {
+                            geoStyle = {
+                                "color": feature.color,
+                                "weight": 2,
+                                "opacity": .6
+                            }
+                            return myStyle;
+                        }
+                    });
+                    boundaries.addTo(map);
+                })
             }
-        })
+        });
     })
 }
+/*L.geoJSON('./geojson/hood_canal.geojson').addTo(map);*/
 
 
 loadMapCoords();
+loadGeoLayer();
