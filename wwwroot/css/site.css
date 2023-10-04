@@ -1,13 +1,7 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
+﻿
 /* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
-}
+
+
 
 img#deletepng {
     width: 33px;
@@ -20,13 +14,24 @@ img#deletepng {
     width: 33px;
 }
 
+<<<<<<< HEAD
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
     max-width: 280px;
+=======
+table.table.w-auto.table-responsive.table-hover.pl-2 {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    max-height: 400px !important;
+>>>>>>> 14cc176 (Beginning GIS Development)
 }
 
+tbody, td, tfoot, th, thead, tr:hover {
+    background-color: blue;
+}
+/* Set width on the form input elements since they're 100% wide by default */
 #msg {
     visibility: hidden;
 }

@@ -1,16 +1,10 @@
 ﻿<div id="databaseManagement">
+
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bind="click: ViewModel.addRecord" data-bs-target="#exampleModal">
-        Add Record
+    <button type="button" class="btn btn-primary my-4" data-bs-toggle="modal" data-bind="click: ViewModel.addRecord" data-bs-target="#exampleModal">
+        Add New Record
     </button>
 
-@*     <button class="btn btn-primary" data-toggle="modal" data-bind="click: ViewModel.addRecord" data-bs-target="#addRecordModal">Add Record</button>
-    <div id="addRecordModal" class="modal w-auto" tabindex="-1" role="dialog">
-        <div class="modal-content container mt-5">
-            <div class="modal-header">
-                <h5 id="ModalLabel" class="modal-title">Add Record</h5> *@
-
-    <!-- Modal -->
     <div id="exampleModal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -24,10 +18,6 @@
                     @* data-bind="submit: addRecord" *@
                     <form data-bind="submit:ViewModel.saveRecord" method="post" class="w-auto">
                         <div class="form-row justify-content-md-center">
-                            @*                         <div class="col-4 form-group">
-                            <label class="sr-only" for="name">Id</label>
-                            <input type="text" class="col form-control" data-bind="value: $data.id" placeholder="Record Name">
-                            </div> *@
                             <div class="col-md-10 col-lg-4 form-group">
                                 <label class="sr-only" for="name">Name</label>
                                 <input type="text" class="col form-control" data-bind="value: $data.Name" id="txtName" placeholder="Record Name">
@@ -120,53 +110,51 @@
         </div>
         </div>
 
+<<<<<<< HEAD
     <table class="table table-fixed table-hover">
         <thead>
+=======
+    <table class="table w-auto table-responsive table-hover pl-2">
+        <thead id="dt_head" class="sticky-top shadow-lg p-3 mb-5 bg-body rounded">
+>>>>>>> 14cc176 (Beginning GIS Development)
             <tr>
-                @* <th class="col-xs-2">ID</th> *@
-                <th class="col-xs-8">Name</th>
-                <th class="col-xs-2">Lat</th>
-                <th class="col-xs-2">Long</th>
-                <th class="col-xs-2">Width(m)</th>
-                <th class="col-xs-2">Depth(m)</th>
-                <th class="col-xs-2">Wildlife</th>
-                <th class="col-xs-2">Biome</th>
-                <th class="col-xs-2">WaterHealth</th>
-                <th class="col-xs-2">Wind Speed</th>
-                <th class="col-xs-2">Water Currents</th>
-                <th class="col-xs-2">Tide</th>
-                <th class="col-xs-2">Invasive Species</th>
-                <th class="col-xs-2">Residential</th>
-                <th class="col-xs-2">Public Land</th>
-                <th class="col-xs-2">Topography</th>
-                <th class="col-xs-2"><input type="text" class="d-none" /></th>
-                <th class="col-xs-8"><input type="text" class="d-none" /></th>
-                <th class="col-xs-2"><input type="text" class="d-none" /></th>
+                <th id="dt_th" class="align-middle col-sm-2 rounded-top-4 rounded-end-0" style="background-color: #51c7f3"><span class="pl-5">Name</span></th>
+                <th class="text-center align-middle" style="background-color: #42c1f4"><span id="th_span">Latitude</span></th>
+                <th class="text-center align-middle" style="background-color: #44bbf3"><span id="th_span">Longitude</span></th>
+                <th class="text-center align-middle" style="background-color: #41b5f2"><span id="th_span">Width (meters)</span></th>
+                <th class="text-center align-middle" style="background-color: #3ea4e4"><span id="th_span">Depth (meters)</span></th>
+                <th class="text-center align-middle" style="background-color: #3ea4e4"><span id="th_span">Wildlife</span></th>
+                <th class="text-center align-middle" style="background-color: #3d96da"><span id="th_span">Biome</span></th>
+                <th class="text-center align-middle" style="background-color: #3d96da"><span id="th_span">Water Health</span></th>
+                <th class="text-center align-middle" style="background-color: #3c89d1"><span id="th_span">Wind Speed</span></th>
+                <th class="text-center align-middle" style="background-color: #3c89d1"><span id="th_span">Water Currents</span></th>
+                <th class="text-center align-middle" style="background-color: #397bc7"><span id="th_span">Tide</span></th>
+                <th class="text-center align-middle" style="background-color: #376ec0"><span id="th_span">Invasive Species</span></th>
+                <th class="text-center align-middle" style="background-color: #3461b6"><span id="th_span">Residential Land</span></th>
+                <th class="text-center align-middle" style="background-color: #3148a6"><span id="th_span">Public Land</span></th>
+                <th class="text-center align-middle" style="background-color: #3148a6"><span id="th_span"></span>Topography Map</span></th>
+                <th class="rounded-top-4 rounded-start-0" style="background-color: #3148a6"></th>
             </tr>
         </thead>
-        <tbody data-bind="template: { foreach: sounds }">
-            <tr>
-                @* <th data-bind="text: permissionReq">Permission Requirement</th> *@
-                <th data-bind="text: name"></th>
-                <th data-bind="text: coordinate_X"></th>
-                <th data-bind="text: coordinate_Y"></th>
-                <th data-bind="text: width_m"></th>
-                <th data-bind="text: depth_m"></th>
-                <th data-bind="text: wildlife"></th>
-                <th data-bind="text: biome"></th>
-                <th data-bind="text: waterHealth"></th>
-                <th data-bind="text: speed"></th>
-                <th data-bind="text: currents"></th>
-                <th data-bind="text: tides"></th>
-                <th data-bind="text: invasiveSpecies"></th>
-                <th data-bind="text: isResidential"></th>
-                <th data-bind="text: isPublicLands"></th>
-                <th data-bind="text: topography"></th>
+        <tbody class="flex w-100" data-bind="template: { foreach: sounds }">
+            <tr class="flex w-80">
+                <th class="pl-5 align-middle" data-bind="text: name"></th>
+                <th class="text-center align-middle" data-bind="text: coordinate_X"></th>
+                <th class="text-center align-middle" data-bind="text: coordinate_Y"></th>
+                <th class="text-center align-middle" data-bind="text: width_m"></th>
+                <th class="text-center align-middle" data-bind="text: depth_m"></th>
+                <th class="text-center align-middle" data-bind="text: wildlife"></th>
+                <th class="text-center align-middle" data-bind="text: biome"></th>
+                <th class="text-center align-middle" data-bind="text: waterHealth"></th>
+                <th class="text-center align-middle" data-bind="text: speed"></th>
+                <th class="text-center align-middle" data-bind="text: currents"></th>
+                <th class="text-center align-middle" data-bind="text: tides"></th>
+                <th class="text-center align-middle" data-bind="text: invasiveSpecies"></th>
+                <th class="text-center align-middle" data-bind="text: isResidential"></th>
+                <th class="text-center align-middle" data-bind="text: isPublicLands"></th>
+                <th class="text-center align-middle" data-bind="text: topography"></th>
                 <td>
                     <button type="button" class="btn btn-outline-warning" value="delete" data-bind="click: function() { deleteRecord($data.id) }"><img style="width:3rem; padding-top:.4rem; padding-left:.25rem;" src="/img/trash-can.svg" /></button>
-@*                     <button type="btn btn-outline-warning" value="delete" data-bind="click: function() { deleteRecord($data.id) }" /> *@
-@*                     <img src="/img/trash-can.svg" />
-                    </button> *@
                 </td>
             </tr>
         </tbody>
